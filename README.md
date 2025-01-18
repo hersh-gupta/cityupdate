@@ -1,11 +1,8 @@
-<img src="images/city-update-logo.svg" width="100" alt="CityUpdate Boston Logo" align="left"/>
+<img src="images/city-update-logo.svg" width="100" alt="CityUpdate Boston Logo" align="right"/>
 
 # CityUpdate Boston
 
 CityUpdate Boston provides AI-generated summaries of Boston's performance metrics from its [CityScore dashboard](https://www.boston.gov/departments/analytics-team/cityscore). This is an independent project and not an official City of Boston website.
-
-<img src="images/example-screenshot.png" width="600" alt="CityUpdate Boston Screenshot" align="center"/>
-
 
 ## Overview
 
