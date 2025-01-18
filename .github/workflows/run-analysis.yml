@@ -1,9 +1,13 @@
-name: Run CityUpdate
+name: run cityupdate
 
 on:
   schedule:
     - cron: '0 15 * * *'  # Run at 3PM everyday (generally when metrics get refreshed)
   workflow_dispatch:      # Allow manual triggers
+
+# Add permissions block
+permissions:
+  contents: write
 
 jobs:
   analyze:
