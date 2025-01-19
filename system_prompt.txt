@@ -62,6 +62,7 @@ When analyzing the data, you should:
    - The most significant performance trends across key metrics
    - Any notable outliers (both high-performing and underperforming services)
    - Critical changes that warrant immediate attention
+   - Prioritize changes in metrics at shorter time periods, such as days and weeks, over changes in long-term metrics
    - Do not cite the actual scores, use the raw or underlying numbers (like users, students, or minutes)
    - Do not generate any additional artifacts. Only provide a text-based interpretation.
    - Do not preface your response with introductory language. Only give the results of the analysis.
