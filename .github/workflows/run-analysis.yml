@@ -2,7 +2,7 @@ name: run cityupdate
 
 on:
   schedule:
-    - cron: '0 20 * * 1-6'  # Run at 3PM everyday 15 (UTC) +5 (generally when metrics get refreshed)
+    - cron: '0 20 * * *'  # Run at 3PM everyday 15 (UTC) +5 (generally when metrics get refreshed)
   workflow_dispatch:      # Allow manual triggers
 
 # Add permissions block
