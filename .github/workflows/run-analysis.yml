@@ -5,7 +5,6 @@ on:
     - cron: '0 20 * * *'  # Run at 3PM everyday 15 (UTC) +5 (generally when metrics get refreshed)
   workflow_dispatch:      # Allow manual triggers
 
-# Add permissions block
 permissions:
   contents: write
 
@@ -27,11 +26,14 @@ jobs:
         pip install anthropic jinja2 httpx
     
     - name: Generate metrics
-      run: python generate_metrics.py
+      id: generate_metrics
+      run: |
+        python generate_metrics.py > metrics_output.txt
+        echo "needs_update=$(cat metrics_output.txt | grep "Needs analysis update" | grep -o 'True\|False')" >> $GITHUB_OUTPUT
       continue-on-error: false
 
     - name: Generate analysis
-      if: success()
+      if: steps.check_update.outputs.needs_update == 'True'
       env:
         ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       run: python generate_analysis.py
