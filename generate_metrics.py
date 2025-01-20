@@ -3,9 +3,13 @@ import csv
 import json
 from urllib.parse import quote
 from typing import Dict, Any
+from datetime import datetime
+from pathlib import Path
 
 metric_defs_file = 'metric_definitions.csv'
 output_file = 'cityscore_metrics.json'
+base_url: str = 'https://data.boston.gov/api/3/action/datastore_search_sql'
+sql_query: str = 'SELECT * from "dd657c02-3443-4c00-8b29-56a40cfe7ee4" WHERE "latest_score_flag" LIKE \'1\''
 
 def load_metric_definitions(file_path: str) -> Dict[str, Dict[str, str]]:
     """Load metric definitions from CSV file"""
@@ -21,9 +25,6 @@ def load_metric_definitions(file_path: str) -> Dict[str, Dict[str, str]]:
         return definitions
     except Exception as e:
         raise ValueError(f"Failed to load metric definitions: {str(e)}")
-
-base_url: str = 'https://data.boston.gov/api/3/action/datastore_search_sql'
-sql_query: str = 'SELECT * from "dd657c02-3443-4c00-8b29-56a40cfe7ee4" WHERE "latest_score_flag" LIKE \'1\''
 
 def get_latest_score(url: str, sql: str) -> Dict[str, Any]:
     """Get the latest CityScore via API"""
@@ -84,6 +85,32 @@ def parse_metric_scores(data: Dict[str, Any], definitions: Dict[str, Dict[str, s
     except (KeyError, ValueError) as e:
         raise ValueError(f"Failed to parse metric data: {str(e)}")
 
+def needs_update(metrics: Dict[str, Any], docs_path: str = 'docs') -> bool:
+    """
+    Check if metrics need to be analyzed by comparing the calculation date
+    with existing analyzed files.
+    
+    Args:
+        metrics: Parsed metrics dictionary
+        docs_path: Path to the docs directory containing analyzed files
+    
+    Returns:
+        bool: True if metrics need to be analyzed, False otherwise
+    """
+    try:
+        # Get the calculation timestamp from 311 call center (reliable metric that's always present)
+        calc_ts = metrics['311 CALL CENTER PERFORMANCE']['calculated_at']
+        metrics_date = datetime.strptime(calc_ts, '%Y-%m-%d %H:%M:%S.%f').strftime('%Y-%m-%d')
+        
+        # Check if analysis already exists for this date
+        existing_file = Path(docs_path) / f"{metrics_date}.html"
+        return not existing_file.exists()
+        
+    except Exception as e:
+        print(f"Error checking metrics update status: {str(e)}")
+        # If there's any error, return True to ensure we don't miss updates
+        return True
+
 def main() -> None:
     """Main function to fetch and process CityScore metrics"""
     try:
@@ -100,13 +127,17 @@ def main() -> None:
         print("Saving file")
         # Write JSON to file with indentation for readability
         try: 
-            with open(output_file, 'w', encoding='utf-8') as f:
+            with open(output_file, 'w', encoding='utf8') as f:
                 json.dump(metrics, f, indent=2)
             print(f"Saved CityScore data as {output_file}")
+            
+            # Check if we need to generate new analysis
+            needs_new_analysis = needs_update(metrics)
+            print(f"\nNeeds analysis update: {needs_new_analysis}")
+            
         except Exception as e:
             print(f"An error occurred: {e}")
         
-
     except Exception as e:
         print(f"Error: {str(e)}")
 
