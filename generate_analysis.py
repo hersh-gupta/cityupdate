@@ -1,6 +1,6 @@
 from anthropic import Anthropic
 from jinja2 import Environment, FileSystemLoader
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import os
 from pathlib import Path
@@ -13,20 +13,32 @@ def strftime_filter(date, format='%A, %B %d, %Y'):
         date = datetime.strptime(date, '%Y-%m-%d')  # Adjust format based on your input
     return date.strftime(format)
 
+def find_previous_date(current_date, docs_path):
+    """Find the most recent date before the current date that has an analysis file"""
+    # Get all existing date files
+    date_files = []
+    for f in docs_path.glob('????-??-??.html'):
+        try:
+            date = datetime.strptime(f.stem, '%Y-%m-%d')
+            if date < datetime.strptime(current_date, '%Y-%m-%d'):
+                date_files.append(f.stem)
+        except ValueError:
+            continue
+    
+    # Sort dates in reverse chronological order
+    date_files.sort(reverse=True)
+    
+    # Return the most recent date or None if no previous dates exist
+    return date_files[0] if date_files else None
+
 def generate_html(analysis, metrics_date, lm_model):
     env = Environment(loader=FileSystemLoader('.'))
     env.filters['strftime'] = strftime_filter
     template = env.get_template('template.html')
     
-    # List existing analysis files to find the previous date
+    # Find the previous date
     docs_path = Path('docs')
-    existing_dates = [f.stem for f in docs_path.glob('????-??-??.html')]
-    existing_dates.sort()
-    try:
-        current_index = existing_dates.index(metrics_date)
-        previous_date = existing_dates[current_index - 1] if current_index > 0 else None
-    except ValueError:
-        previous_date = None
+    previous_date = find_previous_date(metrics_date, docs_path)
     
     return template.render(
         metrics_date=metrics_date,

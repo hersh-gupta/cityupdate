@@ -115,7 +115,7 @@
                 Claude (claude-3-5-sonnet-20241022)
               </a>
             </p>
-            <p>Page rendered on 2025-01-21 15:48:36</p>
+            <p>Page rendered on 2025-01-21 15:59:55</p>
           </div>
         </div>
       </div>
@@ -168,7 +168,13 @@
 
     <footer class="mt-12 flex justify-between items-center border-t border-gray-200 pt-6">
       
-      <span></span>
+      <a href="2025-01-20.html"
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-optimistic-blue hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Previous Day
+      </a>
       
 
       <div class="flex gap-4">
@@ -186,11 +192,11 @@
 
   <script>
     const markdown = `
-Library usage shows strong performance across all time periods, with current usage exceeding historical averages by 57-74%. Emergency services metrics indicate increased demand, with Boston Fire incidents up 10-15% compared to historical averages and EMS response times running approximately 20% slower than the 6-minute target.
+Library usage shows strong performance with activity levels 57-74% above historical averages across all time periods, with the highest increase seen in weekly usage. Emergency services metrics indicate some concerning trends, with Boston Fire incidents running 11-15% above normal levels and EMS response times consistently exceeding the 6-minute target by over 20%. 
 
-Public safety trends show improvement in violent crime categories, with Part 1 crimes down 11-32% compared to historical averages and shootings showing significant decreases over weekly and monthly periods. However, stabbings have increased across all time periods, trending 20-32% above historical averages.
+311 services demonstrate mixed performance. The call center met or exceeded its 95% target for answering calls within 30 seconds in daily and quarterly periods, though weekly performance dipped below target. Constituent satisfaction surveys show positive results, exceeding targets across most timeframes. Core maintenance services reveal variable effectiveness - trash collection excelled with over 20% above-target performance, while streetlight repairs and sign installations struggled significantly below their 80% on-time targets.
 
-Basic city services demonstrate mixed performance. Trash collection and code enforcement are exceeding targets by 12-25%, while infrastructure maintenance services like streetlight repairs and sign installation are significantly underperforming, with some metrics falling 40-60% below targets. Construction permit reviews are particularly concerning, completing only 36-42% of reviews within the target timeframe. The 311 call center maintained strong performance for answering calls promptly, though constituent satisfaction scores are trending below the target level across most time periods.
+Public safety metrics present a nuanced picture. While homicides and shootings showed favorable decreases compared to historical averages, stabbings increased across all time periods. Part 1 crimes decreased notably, with daily rates showing the strongest improvement at 32% below historical levels. Construction permit reviews are significantly underperforming, completing less than half of reviews within the 30-day target window.
       `;
 
     document.getElementById("content").innerHTML = marked.parse(markdown);
