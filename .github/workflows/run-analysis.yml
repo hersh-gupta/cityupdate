@@ -38,9 +38,12 @@ jobs:
         ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       run: python generate_analysis.py
     
+    - name: Clean up temporary files
+      run: rm metrics_output.txt
+
     - name: Commit and push if changed
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add .
+        git add docs/
         git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily analysis" && git push)
