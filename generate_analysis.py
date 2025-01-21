@@ -36,6 +36,31 @@ def generate_html(analysis, metrics_date, lm_model):
         previous_date=previous_date
     )
 
+def generate_all_dates_page():
+    """Generate the all-dates.html page listing all available analyses"""
+    env = Environment(loader=FileSystemLoader('.'))
+    env.filters['strftime'] = strftime_filter
+    template = env.get_template('all_dates_template.html')
+    
+    # Get all date files
+    docs_path = Path("docs")
+    date_files = []
+    for f in docs_path.glob("????-??-??.html"):
+        try:
+            datetime.strptime(f.stem, "%Y-%m-%d")
+            date_files.append(f.stem)
+        except ValueError:
+            continue
+    
+    # Sort dates in reverse chronological order
+    date_files.sort(reverse=True)
+    
+    # Generate the page
+    html = template.render(dates=date_files)
+    
+    with open("docs/all-dates.html", "w") as f:
+        f.write(html)
+
 def main():
     try:
         print("\n=== Starting CityUpdate Analysis Generation ===")
@@ -114,6 +139,11 @@ def main():
             with open("docs/index.html", "w") as f:
                 f.write(html)
             print("✅ Updated index.html")
+            
+            # Generate all-dates page
+            print("\n📑 Generating all-dates page...")
+            generate_all_dates_page()
+            print("✅ Updated all-dates.html")
             
         except Exception as e:
             print(f"❌ ERROR saving files: {str(e)}")
