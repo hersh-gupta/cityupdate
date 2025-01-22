@@ -33,7 +33,7 @@ jobs:
       continue-on-error: false
 
     - name: Generate analysis
-      if: steps.check_update.outputs.needs_update == 'True'
+      if: steps.generate_metrics.outputs.needs_update == 'True'
       env:
         ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       run: python generate_analysis.py
