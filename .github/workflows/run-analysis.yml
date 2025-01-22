@@ -28,7 +28,7 @@ jobs:
     - name: Generate metrics
       id: generate_metrics
       run: |
-        python generate_metrics.py > metrics_output.txt
+        python generate_metrics.py | tee metrics_output.txt
         echo "needs_update=$(cat metrics_output.txt | grep "Needs analysis update" | grep -o 'True\|False')" >> $GITHUB_OUTPUT
       continue-on-error: false
 
