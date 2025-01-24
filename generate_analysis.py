@@ -6,6 +6,10 @@ import os
 from pathlib import Path
 
 claude_model = 'claude-3-5-sonnet-20241022'
+system_prompt_file = 'data/system_prompt.txt'
+metrics_file = 'data/cityscore_metrics.json'
+base_template = 'templates/template.html'
+dates_template = 'templates/all_dates_template.html'
 
 def strftime_filter(date, format='%A, %B %d, %Y'):
     if isinstance(date, str):
@@ -34,7 +38,7 @@ def find_previous_date(current_date, docs_path):
 def generate_html(analysis, metrics_date, lm_model):
     env = Environment(loader=FileSystemLoader('.'))
     env.filters['strftime'] = strftime_filter
-    template = env.get_template('template.html')
+    template = env.get_template(base_template)
     
     # Find the previous date
     docs_path = Path('docs')
@@ -52,7 +56,7 @@ def generate_all_dates_page():
     """Generate the all-dates.html page listing all available analyses"""
     env = Environment(loader=FileSystemLoader('.'))
     env.filters['strftime'] = strftime_filter
-    template = env.get_template('all_dates_template.html')
+    template = env.get_template(dates_template)
     
     # Get all date files
     docs_path = Path("docs")
@@ -94,7 +98,7 @@ def main():
         print("\n🤖 Initializing Claude API...")
         try:
             anthropic = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-            with open("system_prompt.txt", "r") as f:
+            with open(system_prompt_file, "r") as f:
                 system_prompt = f.read()
             print("✅ Successfully loaded system prompt")
             

@@ -6,8 +6,8 @@ from typing import Dict, Any
 from datetime import datetime
 from pathlib import Path
 
-metric_defs_file = 'metric_definitions.csv'
-output_file = 'cityscore_metrics.json'
+metric_defs_file = 'data/metric_definitions.csv'
+output_file = 'data/cityscore_metrics.json'
 base_url: str = 'https://data.boston.gov/api/3/action/datastore_search_sql'
 sql_query: str = 'SELECT * from "dd657c02-3443-4c00-8b29-56a40cfe7ee4" WHERE "latest_score_flag" LIKE \'1\''
 
