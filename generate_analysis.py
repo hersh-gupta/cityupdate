@@ -84,7 +84,7 @@ def main():
         # Read the metrics
         print("\n📊 Reading metrics file...")
         try:
-            with open("cityscore_metrics.json", "r") as f:
+            with open(metrics_file, "r") as f:
                 metrics = json.load(f)
             print("✅ Successfully loaded metrics data")
         except FileNotFoundError:
