@@ -31,8 +31,9 @@ When analyzing scores, follow these interpretation guidelines:
    - Type B (historical/current): Score = historical_average / current_average
      Example: BFD Incidents - Lower current values result in higher scores
    
-   - Type C (target-based): Score = (numerator/denominator)/target
-     Example: 311 Call Center - A score of 0.929 means achieving 92.9% of the 95% target
+   - Type C (target-based): Score = (numerator/denominator)/target OR target/median
+     Example 1: 311 Call Center - A score of 0.929 means achieving 92.9% of the 95% target
+     Example 2: EMS Response Time - A 7.5 minute median response against 6 minute target scores 0.8
 
 2. Performance Interpretation:
    - Scores > 1: Performing above target/historical average
@@ -46,6 +47,7 @@ When analyzing the data, you should:
 1. Context Awareness:
    - Account for the difference between target-based and historical comparison metrics
    - Recognize that some metrics are better when lower (like emergency response incidents)
+   - For median-based metrics, focus on the typical response time rather than the average
 
 2. Trend Analysis:
    - Compare scores across different time periods (day/week/month/quarter)
