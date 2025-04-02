@@ -2,13 +2,13 @@
   "LIBRARY USERS": {
     "title": "Library Users",
     "definition": "If you use your library card to access a service through the Boston Public Library, such as to use a computer or to check out a book or e-book, you are considered an active library user. We want the number of active library users to increase.",
-    "calculated_at": "2025-04-01 08:14:31.139654",
+    "calculated_at": "2025-04-02 08:16:12.999604",
     "target": null,
     "metric_logic": "current_average / historical_average ",
     "scores": {
       "day": {
-        "score": "1.95762959819175",
-        "numerator": "21745",
+        "score": "1.80467431250181",
+        "numerator": "20046",
         "denominator": "11107.8214285714"
       },
       "week": {
@@ -31,14 +31,14 @@
   "BFD INCIDENTS": {
     "title": "Boston Fire Incidents",
     "definition": "An \"incident\" is an occurrence that requires action or support by emergency services (Boston Fire Department) to prevent or minimize loss of life or damage to property. A CityScore greater than 1 indicates a decrease in Boston Fire incidents relative to the historical average.",
-    "calculated_at": "2025-04-01 08:14:47.168877",
+    "calculated_at": "2025-04-02 08:16:29.399703",
     "target": null,
     "metric_logic": "historical_average / current_average",
     "scores": {
       "day": {
-        "score": "1.00393822393822",
+        "score": "1.02048665620094",
         "numerator": "185.728571428571",
-        "denominator": "185"
+        "denominator": "182"
       },
       "week": {
         "score": "0.900970200970201",
@@ -46,28 +46,28 @@
         "denominator": "206.142857142857"
       },
       "month": {
-        "score": "0.918817120622568",
+        "score": "0.918531196514704",
         "numerator": "190.432258064516",
-        "denominator": "207.258064516129"
+        "denominator": "207.322580645161"
       },
       "quarter": {
-        "score": "0.899832860615883",
+        "score": "0.899741719841993",
         "numerator": "197.403333333333",
-        "denominator": "219.377777777778"
+        "denominator": "219.4"
       }
     }
   },
   "311 CALL CENTER PERFORMANCE": {
     "title": "311 Call Center Performance",
     "definition": "The 311 call center is the City's constituent service center, staffed by highly-trained representatives ready to help you with requests for non-emergency City services and information. We aim to have our live agents answer 311 calls within 30 seconds at least 95% of the time.",
-    "calculated_at": "2025-04-01 08:15:03.349172",
+    "calculated_at": "2025-04-02 08:16:45.574073",
     "target": "0.95",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.997701922537974",
-        "numerator": "890",
-        "denominator": "939"
+        "score": "0.964545254349262",
+        "numerator": "876",
+        "denominator": "956"
       },
       "week": {
         "score": "0.94896331738437",
@@ -89,7 +89,7 @@
   "311 CONSTITUENT EXPERIENCE SURVEYS": {
     "title": "311 CONSTITUENT EXPERIENCE SURVEYS",
     "definition": "No definition available",
-    "calculated_at": "2025-04-01 08:15:19.538639",
+    "calculated_at": "2025-04-02 08:17:01.753473",
     "target": "4.0",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
@@ -118,14 +118,14 @@
   "EMS RESPONSE TIME": {
     "title": "EMS Response Time",
     "definition": "When you call 911 to report a life-threatening illness or injury it triggers a priority 1 EMS response. We aim for a median EMS response time of 6 minutes or less for priority 1 responses.",
-    "calculated_at": "2025-04-01 08:15:52.431713",
+    "calculated_at": "2025-04-02 08:17:34.674108",
     "target": "6.0",
     "metric_logic": "target / median",
     "scores": {
       "day": {
-        "score": "0.727272727272727",
+        "score": "0.708661417322835",
         "numerator": "6",
-        "denominator": "8.25"
+        "denominator": "8.46666666666667"
       },
       "week": {
         "score": "0.851063829787234",
@@ -147,7 +147,7 @@
   "BPS ATTENDANCE": {
     "title": "Boston Public Schools Attendance",
     "definition": "We aim for at least 95% of enrolled students to be in attendance every day across all Boston Public Schools during the school year.",
-    "calculated_at": "2025-04-01 08:16:08.420705",
+    "calculated_at": "2025-04-02 08:17:50.664873",
     "target": "0.95",
     "metric_logic": "average(sum(numerator_value)/sum(denominator_value))/target",
     "scores": {
@@ -176,7 +176,7 @@
   "BFD RESPONSE TIME": {
     "title": "Boston Fire Response Time",
     "definition": "When you call 911 to report an incident and Boston Fire is dispatched, we aim for the first fire truck to arrive on scene in four minutes or less from the time they leave the station at least 90% of the time.",
-    "calculated_at": "2025-04-01 08:16:24.614058",
+    "calculated_at": "2025-04-02 08:18:06.666339",
     "target": "0.9",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
@@ -191,21 +191,21 @@
         "denominator": "1412"
       },
       "month": {
-        "score": "0.950132360306217",
-        "numerator": "5312",
-        "denominator": "6212"
+        "score": "0.948136565024759",
+        "numerator": "5457",
+        "denominator": "6395"
       },
       "quarter": {
-        "score": "0.932698673606831",
-        "numerator": "16342",
-        "denominator": "19468"
+        "score": "0.932211535743163",
+        "numerator": "16487",
+        "denominator": "19651"
       }
     }
   },
   "HOMICIDES (TREND)": {
     "title": "Homicides",
     "definition": "The killing of one person by another. A CityScore greater than 1 indicates a decrease in homicides relative to the historical average.",
-    "calculated_at": "2025-04-01 08:16:56.734223",
+    "calculated_at": "2025-04-02 08:18:38.6841",
     "target": null,
     "metric_logic": "historical_average / current_average",
     "scores": {
@@ -234,7 +234,7 @@
   "SHOOTINGS (TREND)": {
     "title": "Shootings",
     "definition": "Assault and battery (non-fatal) with a firearm. A CityScore greater than 1 indicates a decrease in shootings relative to the historical average.",
-    "calculated_at": "2025-04-01 08:17:12.724348",
+    "calculated_at": "2025-04-02 08:18:54.691905",
     "target": null,
     "metric_logic": "historical_average / current_average",
     "scores": {
@@ -263,7 +263,7 @@
   "STABBINGS (TREND)": {
     "title": "Stabbings",
     "definition": "Assault and battery (non-fatal) with a knife. A CityScore greater than 1 indicates a decrease in stabbings relative to the historical average.",
-    "calculated_at": "2025-04-01 08:17:28.779813",
+    "calculated_at": "2025-04-02 08:19:10.797861",
     "target": null,
     "metric_logic": "historical_average / current_average",
     "scores": {
@@ -278,21 +278,21 @@
         "denominator": "1"
       },
       "month": {
-        "score": "1.6403162055336",
+        "score": "1.5719696969697",
         "numerator": "1.21700879765396",
-        "denominator": "0.741935483870968"
+        "denominator": "0.774193548387097"
       },
       "quarter": {
-        "score": "1.25757575757576",
+        "score": "1.24375624375624",
         "numerator": "1.25757575757576",
-        "denominator": "1"
+        "denominator": "1.01111111111111"
       }
     }
   },
   "PART 1 CRIMES": {
     "title": "Part 1 Crimes",
     "definition": "Index crimes reported to the FBI for serious offenses, including aggravated assault, forcible rape, murder, robbery, arson, burglary, larceny-theft, and motor vehicle theft. In CityScore this metric excludes homicides, shootings and stabbings. A CityScore greater than 1 indicates a decrease in Part 1 Crimes relative to the historical average.",
-    "calculated_at": "2025-04-01 08:17:44.973051",
+    "calculated_at": "2025-04-02 08:19:26.904262",
     "target": null,
     "metric_logic": "historical_average / current_average",
     "scores": {
@@ -302,33 +302,33 @@
         "denominator": null
       },
       "week": {
-        "score": "1.20993836671803",
+        "score": "1.16549165120594",
         "numerator": "40.7922077922078",
-        "denominator": "33.7142857142857"
+        "denominator": "35"
       },
       "month": {
-        "score": "1.20355155049033",
+        "score": "1.15851688068713",
         "numerator": "39.950146627566",
-        "denominator": "33.1935483870968"
+        "denominator": "34.4838709677419"
       },
       "quarter": {
-        "score": "1.14219114219114",
+        "score": "1.12808130720422",
         "numerator": "40.5858585858586",
-        "denominator": "35.5333333333333"
+        "denominator": "35.9777777777778"
       }
     }
   },
   "GRAFFITI ON-TIME %": {
     "title": "Graffiti Removal On-Time %",
     "definition": "The removal of graffiti on private property as requested by Boston residents and approved by property owners. We aim to remove at least 80% of this graffiti reported through 311 within 45 business days.",
-    "calculated_at": "2025-04-01 08:18:00.964605",
+    "calculated_at": "2025-04-02 08:19:42.930821",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": null,
-        "numerator": null,
-        "denominator": null
+        "score": "1.25",
+        "numerator": "4",
+        "denominator": "4"
       },
       "week": {
         "score": "0.520833333333333",
@@ -350,14 +350,14 @@
   "POTHOLE ON-TIME %": {
     "title": "Pothole Repair On-Time %",
     "definition": "The Public Works Department repairs potholes to increase safety and reduce vehicular damage. We aim to repair at least 80% of potholes reported through 311 within one business day.",
-    "calculated_at": "2025-04-01 08:18:17.784895",
+    "calculated_at": "2025-04-02 08:19:58.896048",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.869565217391304",
-        "numerator": "16",
-        "denominator": "23"
+        "score": "0.5625",
+        "numerator": "9",
+        "denominator": "20"
       },
       "week": {
         "score": "0.703883495145631",
@@ -379,14 +379,14 @@
   "MISSED TRASH ON-TIME %": {
     "title": "Missed Trash On-Time %",
     "definition": "If your trash or recycling was put out on time but was not picked up, the Public Works Department will send a crew to inspect. We aim to inspect at least 80% of missed trash reported through 311 within 1 business day.",
-    "calculated_at": "2025-04-01 08:18:33.73216",
+    "calculated_at": "2025-04-02 08:20:14.938411",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
         "score": "1.25",
-        "numerator": "12",
-        "denominator": "12"
+        "numerator": "14",
+        "denominator": "14"
       },
       "week": {
         "score": "1.25",
@@ -408,14 +408,14 @@
   "STREETLIGHT ON-TIME %": {
     "title": "Streetlight Outages On-Time %",
     "definition": "The Public Works Department is tasked with repairing broken or malfunctioning streetlights. We aim to repair at least 80% of streetlight outages reported through 311 within 10 business days.",
-    "calculated_at": "2025-04-01 08:18:49.554479",
+    "calculated_at": "2025-04-02 08:20:30.934129",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.75",
-        "numerator": "3",
-        "denominator": "5"
+        "score": "0.208333333333333",
+        "numerator": "1",
+        "denominator": "6"
       },
       "week": {
         "score": "0.5",
@@ -437,14 +437,14 @@
   "SIGNAL REPAIR ON-TIME %": {
     "title": "Signal Repair On-Time %",
     "definition": "The Transportation Department is responsible for repairing broken or malfunctioning traffic signals. We aim to repair at least 80% of traffic signal outages reported through 311 within 24 hours.",
-    "calculated_at": "2025-04-01 08:19:05.440568",
+    "calculated_at": "2025-04-02 08:20:46.949598",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
         "score": "1.25",
-        "numerator": "5",
-        "denominator": "5"
+        "numerator": "7",
+        "denominator": "7"
       },
       "week": {
         "score": "1.14130434782609",
@@ -466,14 +466,14 @@
   "SIGN INSTALLATION ON-TIME %": {
     "title": "Sign Installation On-Time %",
     "definition": "The Transportation Department installs and maintains signs to provide clarity and safety on Boston's streets. We aim to fix damaged signs or install approved new signs within 30 calendar days at least 80% of the time.",
-    "calculated_at": "2025-04-01 08:19:21.414087",
+    "calculated_at": "2025-04-02 08:21:03.029856",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.78125",
-        "numerator": "5",
-        "denominator": "8"
+        "score": null,
+        "numerator": null,
+        "denominator": null
       },
       "week": {
         "score": "0.362903225806452",
@@ -495,14 +495,14 @@
   "PARKS MAINTENANCE ON-TIME %": {
     "title": "Parks Maintenance On-Time %",
     "definition": "The primary tasks of parks maintenance include trash removal, grass cutting, field lining, and maintenance of fencing, benches, play equipment, irrigation; as well as graffiti removal. We aim to address at least 80% of park lighting requests within seven business days and all other parks maintenance requests within five business days.",
-    "calculated_at": "2025-04-01 08:19:37.498272",
+    "calculated_at": "2025-04-02 08:21:18.979718",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "1.25",
-        "numerator": "5",
-        "denominator": "5"
+        "score": "0.833333333333333",
+        "numerator": "4",
+        "denominator": "6"
       },
       "week": {
         "score": "1.08870967741935",
@@ -524,14 +524,14 @@
   "TREE MAINTENANCE ON-TIME %": {
     "title": "Tree Maintenance On-Time %",
     "definition": "The tree maintenance division provides maintenance, including pruning and removal, to 38,000 street trees and 2600 acres of wooded parkland. We aim to perform maintenance on at least 80% of trees reported through 311 within 365 calendar days.",
-    "calculated_at": "2025-04-01 08:19:53.453397",
+    "calculated_at": "2025-04-02 08:21:35.20627",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
         "score": "1.25",
-        "numerator": "2",
-        "denominator": "2"
+        "numerator": "1",
+        "denominator": "1"
       },
       "week": {
         "score": "1.25",
@@ -553,14 +553,14 @@
   "CODE ENFORCEMENT ON-TIME %": {
     "title": "Code Enforcement On-Time %",
     "definition": "Public Works Code Enforcement Officers respond to constituent complaints about issues that violate State and City Sanitary Codes (improper storage of trash, unshoveled sidewalks, overgrown weeds). We aim to respond to at least 80% of these constituent complaints within two business days.",
-    "calculated_at": "2025-04-01 08:20:09.401441",
+    "calculated_at": "2025-04-02 08:21:51.296315",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
         "score": "1.25",
-        "numerator": "36",
-        "denominator": "36"
+        "numerator": "26",
+        "denominator": "26"
       },
       "week": {
         "score": "1.25",
@@ -568,28 +568,28 @@
         "denominator": "226"
       },
       "month": {
-        "score": "1.24880038387716",
-        "numerator": "1041",
-        "denominator": "1042"
+        "score": "1.2488072519084",
+        "numerator": "1047",
+        "denominator": "1048"
       },
       "quarter": {
-        "score": "1.23908069883527",
-        "numerator": "4766",
-        "denominator": "4808"
+        "score": "1.23909430826755",
+        "numerator": "4772",
+        "denominator": "4814"
       }
     }
   },
   "CODE ENFORCEMENT TRASH COLLECTION": {
     "title": "Code Enforcement Collection Within 24 Hours",
     "definition": "When our Public Works Code Enforcement officers issue violations for trash-related infractions like Illegal Dumping or Over-filling of Trash Barrels. They also create a 311 case for that trash to be picked up by our sanitation workers. We aim to collect that trash or debris within 24 hours at least 80% of the time.",
-    "calculated_at": "2025-04-01 08:20:25.653875",
+    "calculated_at": "2025-04-02 08:22:07.341424",
     "target": "0.8",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "1.25",
-        "numerator": "57",
-        "denominator": "57"
+        "score": "1.23511904761905",
+        "numerator": "83",
+        "denominator": "84"
       },
       "week": {
         "score": "1.23076923076923",
@@ -611,14 +611,14 @@
   "ON-TIME PERMIT REVIEWS": {
     "title": "On-Time Permit Reviews",
     "definition": "For construction permits that require Building and Zoning review, we measure the number of calendar days from when a review is created and assigned (once the permit has been submitted, the initial administrative reviews completed, and the fees have been paid) to the review result. Reviews completed in 30 or fewer calendar days (including weekends and holidays) are considered on-time, and we aim to complete 100% of reviews on-time.",
-    "calculated_at": "2025-04-01 08:20:41.7236",
+    "calculated_at": "2025-04-02 08:22:23.505341",
     "target": "1.0",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.613333333333333",
-        "numerator": "46",
-        "denominator": "75"
+        "score": "0.411764705882353",
+        "numerator": "21",
+        "denominator": "51"
       },
       "week": {
         "score": "0.6484375",
@@ -626,28 +626,28 @@
         "denominator": "256"
       },
       "month": {
-        "score": "0.600347523892268",
+        "score": "0.600869565217391",
         "numerator": "691",
-        "denominator": "1151"
+        "denominator": "1150"
       },
       "quarter": {
-        "score": "0.526461623718482",
+        "score": "0.526607538802661",
         "numerator": "1900",
-        "denominator": "3609"
+        "denominator": "3608"
       }
     }
   },
   "CITY SERVICES SATISFACTION SURVEYS": {
     "title": "Constituent Satisfaction Surveys",
     "definition": "If you provide an email address when making a 311 request, you will be notified when your case is closed and asked to rate your experience. We aim to average at least 4 out of 5 on our constituent satisfaction surveys.",
-    "calculated_at": "2025-04-01 08:20:57.849268",
+    "calculated_at": "2025-04-02 08:22:39.595983",
     "target": "4.0",
     "metric_logic": "sum(numerator_value)/sum(denominator_value)/target",
     "scores": {
       "day": {
-        "score": "0.583333333333333",
-        "numerator": "7",
-        "denominator": "3"
+        "score": "0.5",
+        "numerator": "8",
+        "denominator": "4"
       },
       "week": {
         "score": "1.25",
