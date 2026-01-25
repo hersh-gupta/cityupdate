@@ -5,7 +5,7 @@ import json
 import os
 from pathlib import Path
 
-claude_model = 'claude-3-5-sonnet-20241022'
+claude_model = 'claude-haiku-4-5-20251001'
 system_prompt_file = 'data/system_prompt.txt'
 metrics_file = 'data/cityscore_metrics.json'
 base_template = 'templates/template.html'
