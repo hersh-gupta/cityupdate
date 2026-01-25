@@ -1,15 +1,14 @@
 import httpx
 import csv
 import json
-from urllib.parse import quote
 from typing import Dict, Any
 from datetime import datetime
 from pathlib import Path
 
 metric_defs_file = 'data/metric_definitions.csv'
 output_file = 'data/cityscore_metrics.json'
-base_url: str = 'https://data.boston.gov/api/3/action/datastore_search_sql'
-sql_query: str = 'SELECT * from "dd657c02-3443-4c00-8b29-56a40cfe7ee4" WHERE "latest_score_flag" LIKE \'1\''
+base_url: str = 'https://data.boston.gov/api/3/action/datastore_search'
+resource_id: str = 'dd657c02-3443-4c00-8b29-56a40cfe7ee4'
 
 def load_metric_definitions(file_path: str) -> Dict[str, Dict[str, str]]:
     """Load metric definitions from CSV file"""
@@ -30,22 +29,27 @@ def load_metric_definitions(file_path: str) -> Dict[str, Dict[str, str]]:
         print(f"❌ Error loading definitions: {str(e)}")
         raise
 
-def get_latest_score(url: str, sql: str) -> Dict[str, Any]:
+def get_latest_score(url: str, resource_id: str) -> Dict[str, Any]:
     """Get the latest CityScore via API"""
     try:
-        encoded_sql = quote(sql, safe='')
-        full_url = f"{url}?sql={encoded_sql}"
-        
+        # Use the datastore_search endpoint with filters
+        # Filter for records where latest_score_flag = 1
+        params = {
+            'resource_id': resource_id,
+            'filters': json.dumps({'latest_score_flag': '1'}),
+            'limit': 100  # Get all metrics (currently 23)
+        }
+
         print("  Sending API request...")
         start_time = datetime.now()
-        resp = httpx.get(full_url, timeout=10.0)
-        
+        resp = httpx.get(url, params=params, timeout=10.0)
+
         elapsed_time = (datetime.now() - start_time).total_seconds()
         print(f"  Request completed in {elapsed_time:.2f} seconds")
-        
+
         resp.raise_for_status()
         return resp.json()
-        
+
     except httpx.TimeoutException:
         print("❌ API request timed out after 10 seconds")
         raise
@@ -118,11 +122,18 @@ def needs_update(metrics: Dict[str, Any], docs_path: str = 'docs') -> bool:
     """Check if metrics need to be analyzed"""
     try:
         calc_ts = metrics['311 CALL CENTER PERFORMANCE']['calculated_at']
-        metrics_date = datetime.strptime(calc_ts, '%Y-%m-%d %H:%M:%S.%f').strftime('%Y-%m-%d')
-        
+
+        # Try parsing with microseconds first (old format), then without (new format)
+        try:
+            metrics_date = datetime.strptime(calc_ts, '%Y-%m-%d %H:%M:%S.%f').strftime('%Y-%m-%d')
+        except ValueError:
+            # New API format: 2026-01-21T11:31:24
+            metrics_date = datetime.strptime(calc_ts, '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')
+
+        print(f"✅ Analysis date: {metrics_date}")
         existing_file = Path(docs_path) / f"{metrics_date}.html"
         return not existing_file.exists()
-        
+
     except Exception as e:
         print(f"❌ Error checking update status: {str(e)}")
         # If there's any error, return True to ensure we don't miss updates
@@ -140,7 +151,7 @@ def main() -> None:
         
         # Get metrics from API
         print("\n🌐 Fetching CityScore data from data.boston.gov...")
-        raw_data = get_latest_score(base_url, sql_query)
+        raw_data = get_latest_score(base_url, resource_id)
         record_count = len(raw_data.get('result', {}).get('records', []))
         print(f"✅ Successfully retrieved {record_count} records from API")
         

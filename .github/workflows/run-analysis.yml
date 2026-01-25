@@ -1,49 +1,131 @@
-name: run cityupdate
+name: CityUpdate Daily Analysis
 
 on:
   schedule:
-    - cron: '0 20 * * *'  # Run at 3PM everyday 15 (UTC) +5 (generally when metrics get refreshed)
+    - cron: '0 20 * * *'  # Run at 8PM UTC (3PM EST) when metrics refresh
   workflow_dispatch:      # Allow manual triggers
+    inputs:
+      force_update:
+        description: 'Force analysis generation even if already exists'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+  issues: write  # For failure notifications (optional)
+
+# Prevent concurrent runs to avoid conflicts
+concurrency:
+  group: cityupdate-analysis
+  cancel-in-progress: false
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 15  # Fail if job takes too long
+
     steps:
-    - uses: actions/checkout@v4
-    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1  # Shallow clone for faster checkout
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-    
+        cache: 'pip'  # Cache pip dependencies
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install anthropic jinja2 httpx
-    
+        pip install -r requirements.txt
+
     - name: Generate metrics
       id: generate_metrics
       run: |
-        python generate_metrics.py | tee metrics_output.txt
-        echo "needs_update=$(cat metrics_output.txt | grep "Needs analysis update" | grep -o 'True\|False')" >> $GITHUB_OUTPUT
+        python generate_metrics.py 2>&1 | tee metrics_output.txt
+
+        # Extract update status from output
+        if grep -q "Needs analysis update: True" metrics_output.txt; then
+          echo "needs_update=true" >> $GITHUB_OUTPUT
+          echo "status=needs_update" >> $GITHUB_OUTPUT
+        elif grep -q "Needs analysis update: False" metrics_output.txt; then
+          echo "needs_update=false" >> $GITHUB_OUTPUT
+          echo "status=up_to_date" >> $GITHUB_OUTPUT
+        else
+          echo "needs_update=false" >> $GITHUB_OUTPUT
+          echo "status=unknown" >> $GITHUB_OUTPUT
+        fi
+
+        # Extract date if available
+        if grep -q "Analysis date:" metrics_output.txt; then
+          DATE=$(grep "Analysis date:" metrics_output.txt | awk '{print $NF}')
+          echo "analysis_date=$DATE" >> $GITHUB_OUTPUT
+        fi
       continue-on-error: false
 
     - name: Generate analysis
-      if: steps.generate_metrics.outputs.needs_update == 'True'
+      id: generate_analysis
+      if: steps.generate_metrics.outputs.needs_update == 'true' || github.event.inputs.force_update == 'true'
       env:
         ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      run: python generate_analysis.py
-    
-    - name: Clean up temporary files
-      run: rm metrics_output.txt
-
-    - name: Commit and push if changed
       run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
+        python generate_analysis.py 2>&1 | tee analysis_output.txt
+        echo "analysis_generated=true" >> $GITHUB_OUTPUT
+
+    - name: Clean up temporary files
+      if: always()  # Run even if previous steps fail
+      run: |
+        rm -f metrics_output.txt analysis_output.txt
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if [[ -n $(git status --porcelain docs/ data/) ]]; then
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Commit and push changes
+      if: steps.check_changes.outputs.has_changes == 'true'
+      run: |
+        git config --global user.name 'CityUpdate Bot'
+        git config --global user.email 'cityupdate-bot@users.noreply.github.com'
         git add docs/ data/
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily analysis" && git push)
+
+        # Create descriptive commit message
+        if [[ -n "${{ steps.generate_metrics.outputs.analysis_date }}" ]]; then
+          COMMIT_MSG="Update daily analysis for ${{ steps.generate_metrics.outputs.analysis_date }}"
+        else
+          COMMIT_MSG="Update daily analysis for $(date -u +%Y-%m-%d)"
+        fi
+
+        git commit -m "$COMMIT_MSG" -m "Automated update via GitHub Actions"
+        git push
+
+    - name: Summary
+      if: always()
+      run: |
+        echo "## CityUpdate Analysis Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ${{ steps.generate_metrics.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Needs Update**: ${{ steps.generate_metrics.outputs.needs_update }}" >> $GITHUB_STEP_SUMMARY
+
+        if [[ -n "${{ steps.generate_metrics.outputs.analysis_date }}" ]]; then
+          echo "- **Analysis Date**: ${{ steps.generate_metrics.outputs.analysis_date }}" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        if [[ "${{ steps.generate_analysis.outputs.analysis_generated }}" == "true" ]]; then
+          echo "- **Analysis Generated**: ✅ Yes" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Analysis Generated**: ⏭️ Skipped (no update needed)" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        if [[ "${{ steps.check_changes.outputs.has_changes }}" == "true" ]]; then
+          echo "- **Changes Committed**: ✅ Yes" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Changes Committed**: ℹ️ No changes to commit" >> $GITHUB_STEP_SUMMARY
+        fi

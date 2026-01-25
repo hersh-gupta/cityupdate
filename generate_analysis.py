@@ -123,16 +123,21 @@ def main():
         # Extract date from metrics
         print("\n📅 Extracting metrics date...")
         try:
-            metrics_date = datetime.strptime(
-                metrics['311 CALL CENTER PERFORMANCE']['calculated_at'], 
-                '%Y-%m-%d %H:%M:%S.%f'
-            ).strftime('%Y-%m-%d')
+            calc_ts = metrics['311 CALL CENTER PERFORMANCE']['calculated_at']
+
+            # Try parsing with microseconds first (old format), then without (new format)
+            try:
+                metrics_date = datetime.strptime(calc_ts, '%Y-%m-%d %H:%M:%S.%f').strftime('%Y-%m-%d')
+            except ValueError:
+                # New API format: 2026-01-21T11:31:24
+                metrics_date = datetime.strptime(calc_ts, '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')
+
             print(f"✅ Analysis date: {metrics_date}")
         except KeyError:
             print("❌ ERROR: Could not find calculated_at timestamp in metrics!")
             raise
-        except ValueError:
-            print("❌ ERROR: Invalid timestamp format in metrics!")
+        except ValueError as e:
+            print(f"❌ ERROR: Invalid timestamp format in metrics: {e}")
             raise
             
         # Generate HTML

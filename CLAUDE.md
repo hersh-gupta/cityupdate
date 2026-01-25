@@ -16,7 +16,10 @@ CityUpdate Boston is an AI-powered municipal analytics platform that automatical
 
 ### Setup
 ```bash
-# Install dependencies
+# Install dependencies (recommended)
+pip install -r requirements.txt
+
+# Or install individually
 pip install anthropic httpx jinja2
 
 # Set environment variable (required for generate_analysis.py)
@@ -96,8 +99,15 @@ GitHub Pages (published)
 **CI/CD:**
 - `.github/workflows/run-analysis.yml` - Automated daily pipeline:
   - Runs at 20:00 UTC (3 PM EST, when metrics typically refresh)
+  - Supports manual triggers with optional `force_update` parameter
   - Only generates new analysis if metrics date doesn't have existing HTML file
-  - Auto-commits and pushes changes to trigger GitHub Pages deployment
+  - Auto-commits and pushes changes with descriptive commit messages (includes date)
+  - Concurrency control prevents overlapping runs
+  - Pip dependency caching for faster builds
+  - GitHub Actions summary shows workflow status and decisions
+  - 15-minute timeout to prevent hung jobs
+- `.github/dependabot.yml` - Automatic dependency updates (weekly)
+- `requirements.txt` - Pinned Python dependencies for reproducibility
 
 ### Metric Score Interpretation
 
