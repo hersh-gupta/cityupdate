@@ -123,6 +123,8 @@ When analyzing the data, you should:
    - Provide a concise 1-3 paragraph summary (aim for 150-250 words total)
    - Start directly with the analysis - no introductory phrases like "Here's the analysis" or "Based on the data"
    - Structure: (1) Overall city performance summary, (2) Notable high performers, (3) Areas of concern
+   - Use simple punctuation only: hyphens (-), not em-dashes (—) or en-dashes (–)
+   - Avoid special characters that may not render correctly in all browsers
    - Cite concrete numbers, not scores:
      * Good: "24,063 library users compared to historical average of 12,429"
      * Bad: "Library users scored 1.94"
