@@ -108,14 +108,14 @@
 
           <!-- Metrics info -->
           <div class="flex flex-col space-y-1 text-xs text-gray-500 lg:items-end">
-            <p>Metrics from <span class="font-medium">Wednesday, January 21, 2026</span></p>
+            <p>Metrics from Wednesday, January 21, 2026</p>
             <p>Generated from
               <a href="https://docs.anthropic.com/en/docs/about-claude/models"
                 class="font-mono text-optimistic-blue hover:text-blue-600 transition-colors">
                 Claude (claude-haiku-4-5-20251001)
               </a>
             </p>
-            <p>Page rendered on 2026-01-25 18:57:46</p>
+            <p>Page rendered Sunday, January 25, 2026 7:06pm</p>
           </div>
         </div>
       </div>
@@ -192,11 +192,11 @@
 
   <script>
     const markdown = `
-Boston's municipal services are delivering mixed results across the latest measurement period. Library usage remains exceptionally strong at 24,063 daily active users - nearly double the historical average of 12,429. The city is also excelling in several public works response areas, with Code Enforcement officers responding to 100% of complaints within the two-business-day target and trash collection happening within 24 hours for 86% of cases (well above the 80% goal). Signal repair performance is similarly solid at 100% on-time completion. Meanwhile, 311 call center performance is meeting targets, with 88% of calls answered within 30 seconds this week, though this represents a slight dip from the monthly performance of 93%.
+Boston's municipal services are delivering mixed results across emergency response, public works, and constituent services. Library usage remains exceptionally strong at 24,063 daily users - nearly double the historical average of 12,429. The 311 call center is meeting targets, answering 883 of 1,004 daily calls within 30 seconds (88% against the 95% goal), though weekly performance improved to 95.3%, suggesting recent stabilization. Crime trends show notable improvement: shootings are down significantly with a weekly score of 1.19 (indicating reduction versus historical average), stabbings down 5.29x weekly, and Part 1 crimes down 1.22x weekly.
 
-Emergency services show concerning trends. Fire incidents remain above historical averages (216 this week versus 202 historical), and EMS response times are lagging, with a median of 6.76 minutes this week against the six-minute target. Crime metrics present a mixed picture, with shootings down significantly this month (score of 2.75 indicating substantial improvement relative to historical averages) and part 1 crimes also trending favorably, but homicide scores remain concerning with elevated recent averages.
+Strong performers include signal repair (21 of 23 weekly repairs on-time), code enforcement response (227 of 228 complaints addressed on-time), and trash collection following code violations (266 of 272 completed within 24 hours). Emergency response metrics show some pressure: EMS median response time of 6.77 minutes slightly exceeds the 6-minute target, while fire response times achieved 83.4% on-time arrivals (1,219 of 1,463) against the 90% goal.
 
-Several on-time service metrics are underperforming. Pothole repairs are completing only 58% on-time this week against the 80% target, missed trash inspections are marginally above target, and permit reviews are significantly behind at 66% on-time completion. Sign installation performance remains particularly weak at 43% on-time, reflecting ongoing supply chain and approval challenges. BFD response times are narrowly below the 90% on-time standard at 83% completion this week.
+Key challenges exist in permit reviews, where only 59.9% of daily reviews met the 30-day deadline (37 of 62), and sign installation remains deeply problematic at just 34.5% weekly completion (30 of 87). Pothole repairs also underperform, with only 57.7% completed within one business day (60 of 130). Parks and graffiti removal are performing well, though both show slightly lower monthly metrics than quarterly, suggesting recent minor fluctuations. Missed trash inspections continue exceeding targets across all periods.
       `;
 
     document.getElementById("content").innerHTML = marked.parse(markdown);

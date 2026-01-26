@@ -108,14 +108,14 @@
 
           <!-- Metrics info -->
           <div class="flex flex-col space-y-1 text-xs text-gray-500 lg:items-end">
-            <p>Metrics from <span class="font-medium">{{ metrics_date | strftime('%A, %B %d, %Y') }}</span></p>
+            <p>Metrics from {{ metrics_date | strftime('%A, %B %d, %Y') }}</p>
             <p>Generated from
               <a href="https://docs.anthropic.com/en/docs/about-claude/models"
                 class="font-mono text-optimistic-blue hover:text-blue-600 transition-colors">
                 Claude ({{ lm_model }})
               </a>
             </p>
-            <p>Page rendered on {{ generated_time }}</p>
+            <p>Page rendered {{ generated_time }}</p>
           </div>
         </div>
       </div>
