@@ -1,6 +1,7 @@
 from anthropic import Anthropic
 from jinja2 import Environment, FileSystemLoader
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 import json
 import os
 from pathlib import Path
@@ -44,10 +45,10 @@ def generate_html(analysis, metrics_date, lm_model):
     docs_path = Path('docs')
     previous_date = find_previous_date(metrics_date, docs_path)
     
-    # Format: "Wednesday, January 21, 2026 6:57pm"
-    now = datetime.now()
+    # Format: "Wednesday, January 21, 2026 6:57pm ET"
+    now = datetime.now(ZoneInfo('America/New_York'))
     hour = now.strftime('%I').lstrip('0') or '12'  # Remove leading zero, handle midnight
-    time_str = now.strftime(f'%A, %B %d, %Y {hour}:%M%p').replace('AM', 'am').replace('PM', 'pm')
+    time_str = now.strftime(f'%A, %B %d, %Y {hour}:%M%p ET').replace('AM', 'am').replace('PM', 'pm')
 
     return template.render(
         metrics_date=metrics_date,

@@ -2,7 +2,7 @@ name: CityUpdate Daily Analysis
 
 on:
   schedule:
-    - cron: '0 20 * * *'  # Run at 8PM UTC (3PM EST) when metrics refresh
+    - cron: '0 1 * * *'  # Run at 1AM UTC (8PM EST / 9PM EDT) when metrics refresh
   workflow_dispatch:      # Allow manual triggers
     inputs:
       force_update:
