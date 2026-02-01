@@ -1,4 +1,4 @@
 # Core dependencies for CityUpdate Boston
-anthropic==0.40.0
+anthropic==0.77.0
 httpx==0.28.1
-jinja2==3.1.5
+jinja2==3.1.6
