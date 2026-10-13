@@ -108,14 +108,14 @@
 
           <!-- Metrics info -->
           <div class="flex flex-col space-y-1 text-xs text-gray-500 lg:items-end">
-            <p>Metrics from Friday, October 09, 2026</p>
+            <p>Metrics from Monday, October 12, 2026</p>
             <p>Generated from
               <a href="https://docs.anthropic.com/en/docs/about-claude/models"
                 class="font-mono text-optimistic-blue hover:text-blue-600 transition-colors">
                 Claude (claude-haiku-4-5-20251001)
               </a>
             </p>
-            <p>Page rendered Saturday, October 10, 2026 2:43am ET</p>
+            <p>Page rendered Tuesday, October 13, 2026 3:25am ET</p>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@
 
     <footer class="mt-12 flex justify-between items-center border-t border-gray-200 pt-6">
       
-      <a href="2026-10-08.html"
+      <a href="2026-10-09.html"
         class="inline-flex items-center px-4 py-2 text-sm font-medium text-optimistic-blue hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -192,11 +192,13 @@
 
   <script>
     const markdown = `
-Boston's municipal services show mixed performance across the measured metrics. Emergency response and crime indicators present a concerning picture, while constituent service satisfaction and library usage remain strong.
+Boston's municipal services show mixed performance across available metrics, with strong results in emergency crime prevention but notable challenges in permitting and constituent satisfaction.
 
-Emergency services are underperforming key targets. Fire department response times achieved 80 of 100 calls within 4 minutes on the weekly basis (89% of the 90% target), with improvement trending toward the quarterly rate of 90%. EMS median response times for priority 1 calls averaged 6.98 minutes weekly and 6.71 minutes monthly, exceeding the 6-minute target. Crime metrics show mixed results - shootings decreased significantly (3.38x below historical average weekly), and Part 1 crimes declined 24% below historical average weekly, but homicides and stabbings remain elevated. Weekly stabbings averaged 1.58 incidents, above the historical average of 1.86.
+Crime metrics demonstrate significant improvement. Part 1 Crimes (excluding homicides, shootings, and stabbings) show particularly strong performance with weekly incidents averaging 49.7 compared to the historical average of 23.3 - more than double the historical rate. Shootings have declined substantially, averaging 1.04 incidents weekly versus a historical average of 0.14. Stabbings also improved with 1.54 weekly incidents against a historical average of 0.86. Homicides remain elevated at the monthly level with 0.13 incidents compared to the historical average of 0.07, though quarterly data shows improvement at 0.15 versus 0.16 historically.
 
-Constituent services perform well overall. The 311 call center answered 857 of 892 daily calls within 30 seconds (96% of target), with weekly performance at 93.4% of the 95% target. Constituent experience surveys averaged 4.0 out of 5 stars daily and maintained 4.1 out of 5 weekly, exceeding the target. Library usage remained strong at approximately 24,192 weekly users, nearly double the historical average of 12,642. Permit review processing lagged significantly, completing only 23 of 33 daily reviews (70% of the 100% target), with quarterly performance reaching 77% of target. Most Public Works metrics including graffiti removal, pothole repair, streetlight outages, and tree maintenance lack current data for analysis.
+Core emergency services and constituent services present a mixed picture. The 311 Call Center answered 331 of 336 calls within 30 seconds on the most recent day (98% of calls), exceeding the 95% target. Library usage remains strong at 24,018 weekly users, nearly double the historical average of 12,513. EMS Response Time for priority 1 calls averaged 6.84 minutes weekly against a 6-minute target. However, constituent satisfaction surveys show concerning trends, with daily ratings averaging 3.0 out of 5 (75% of target) and declining to 2.58 at the quarterly level (65% of target).
+
+Permitting represents a significant operational challenge. On-time permit reviews are substantially underperforming, with only 146 of 228 weekly reviews (64% of the 100% target) completed within the 30-day standard. Multiple Public Works metrics including graffiti removal, pothole repair, missed trash inspection, streetlight repair, and code enforcement show no available data across all time periods.
       `;
 
     document.getElementById("content").innerHTML = marked.parse(markdown);
